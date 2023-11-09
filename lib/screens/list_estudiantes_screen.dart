@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:notes_api_crud_app/services/notes_service.dart';
+import 'package:notes_api_crud_app/services/estudiante_service.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/actual_option_provider.dart';
 
-class ListNotesScreen extends StatelessWidget {
-  const ListNotesScreen({Key? key}) : super(key: key);
+class ListEstudiantesScreen extends StatelessWidget {
+  const ListEstudiantesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _ListNotes();
+    return _ListEstudiantes();
   }
 }
 
-class _ListNotes extends StatelessWidget {
+class _ListEstudiantes extends StatelessWidget {
   void displayDialog(
-      BuildContext context, NotesService noteService, String id) {
+      BuildContext context, EstudianteService estudianteService, String id) {
     showDialog(
         barrierDismissible: false,
         context: context,
@@ -38,7 +38,7 @@ class _ListNotes extends StatelessWidget {
                   child: const Text('Cancelar')),
               TextButton(
                   onPressed: () {
-                    noteService.deleteNoteById(id);
+                    estudianteService.deleteEstudianteById(id);
                     Navigator.pop(context);
                   },
                   child: const Text('Ok')),
@@ -49,27 +49,27 @@ class _ListNotes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NotesService noteService = Provider.of<NotesService>(context);
+    EstudianteService estudianteService = Provider.of<EstudianteService>(context);
     //noteService.loadNotes();
-    final notes = noteService.notes;
+    final estudiantes = estudianteService.estudiantes;
 
     return ListView.builder(
-      itemCount: notes.length,
+      itemCount: estudiantes.length,
       itemBuilder: (_, index) => ListTile(
         leading: const Icon(Icons.note),
-        title: Text(notes[index].title),
-        subtitle: Text(notes[index].id.toString()),
+        title: Text(estudiantes[index].id),
+        subtitle: Text(estudiantes[index].toString()),
         trailing: PopupMenuButton(
           // icon: Icon(Icons.fire_extinguisher),
           onSelected: (int i) {
             if (i == 0) {
-              noteService.selectedNote = notes[index];
+              estudianteService.selectedEstudiante = estudiantes[index];
               Provider.of<ActualOptionProvider>(context, listen: false)
                   .selectedOption = 1;
               return;
             }
 
-            displayDialog(context, noteService, notes[index].id!);
+            displayDialog(context, estudianteService, estudiantes[index].id!);
           },
           itemBuilder: (context) => [
             const PopupMenuItem(value: 0, child: Text('Actualizar')),
