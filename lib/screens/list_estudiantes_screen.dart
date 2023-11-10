@@ -57,7 +57,7 @@ class _ListEstudiantes extends StatelessWidget {
       itemCount: estudiantes.length,
       itemBuilder: (_, index) => ListTile(
         leading: const Icon(Icons.note),
-        title: Text(estudiantes[index].id),
+        title: Text(estudiantes[index].cedula),
         subtitle: Text(estudiantes[index].toString()),
         trailing: PopupMenuButton(
           // icon: Icon(Icons.fire_extinguisher),

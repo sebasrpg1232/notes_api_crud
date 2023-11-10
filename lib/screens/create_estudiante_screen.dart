@@ -41,18 +41,18 @@ class _CreateForm extends StatelessWidget {
           TextFormField(
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
-            initialValue: estudiante.id,
+            initialValue: estudiante.cedula,
             decoration: const InputDecoration(
                 hintText: 'Ingresa tu # de documento',
                 labelText: 'Documento',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 8, horizontal: 8)),
-            onChanged: (value) => estudianteFormProvider.estudiante.id = value,
+            onChanged: (value) => estudianteFormProvider.estudiante.cedula = value,
             validator: (value) {
               return value != '' ? null : 'El campo no debe estar vacío';
             },
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 15),
           TextFormField(
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
@@ -67,9 +67,8 @@ class _CreateForm extends StatelessWidget {
               return value != '' ? null : 'El campo no debe estar vacío';
             },
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 15),
           TextFormField(
-            maxLines: 10,
             autocorrect: false,
             initialValue: estudiante.correo,
             // keyboardType: TextInputType.emailAddress,
@@ -82,9 +81,8 @@ class _CreateForm extends StatelessWidget {
               return (value != null) ? null : 'El campo no puede estar vacío';
             },
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 15),
           TextFormField(
-            maxLines: 10,
             autocorrect: false,
             initialValue: estudiante.edad,
             // keyboardType: TextInputType.emailAddress,
@@ -97,9 +95,8 @@ class _CreateForm extends StatelessWidget {
               return (value != null) ? null : 'El campo no puede estar vacío';
             },
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 15),
           TextFormField(
-            maxLines: 10,
             autocorrect: false,
             initialValue: estudiante.celular,
             // keyboardType: TextInputType.emailAddress,
@@ -112,6 +109,21 @@ class _CreateForm extends StatelessWidget {
               return (value != null) ? null : 'El campo no puede estar vacío';
             },
           ),
+          const SizedBox(height: 15),
+          TextFormField(
+            autocorrect: false,
+            initialValue: estudiante.facultad,
+            // keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+              hintText: 'Ingresa tu número celular',
+              labelText: 'Facultad',
+            ),
+            onChanged: (value) => estudiante.facultad = value,
+            validator: (value) {
+              return (value != null) ? null : 'El campo no puede estar vacío';
+            },
+          ),
+          const SizedBox(height: 15),
           MaterialButton(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -125,6 +137,8 @@ class _CreateForm extends StatelessWidget {
                     FocusScope.of(context).unfocus();
 
                     if (!estudianteFormProvider.isValidForm()) return;
+                    print("create or update");
+                    print(estudianteFormProvider.estudiante.id);
                     await estudianteService.createOrUpdate(estudianteFormProvider.estudiante);
                     actualOptionProvider.selectedOption = 0;
                   },

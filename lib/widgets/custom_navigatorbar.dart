@@ -20,7 +20,7 @@ class CustomNavigatorBar extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: (int i) {
         if (i == 1) {
-          estudianteService.selectedEstudiante = Estudiante(id: '', nombre: '', facultad: '', correo: '', edad: '', celular: '');
+          estudianteService.selectedEstudiante = Estudiante(id: '', cedula: '', nombre: '', facultad: '', correo: '', edad: '', celular: '');
         }
         actualOptionProvider.selectedOption = i;
       },
